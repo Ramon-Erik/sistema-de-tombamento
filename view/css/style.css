@@ -5,12 +5,15 @@
     --cor-bg-header: #0074de;
     /* para computdores (com imagem e cor): */
     --bg-header: #0074de;
+    --cor-bg-nav: #003465;
+    --cor-bg-nav-item-hover: #00284e;
     --cor-bg-art: #0000006e;
     --cor-bg-main: #f9fdff;
     --cor-bg-btn-enviar: #005db4;
     --cor-txt-btn-enviar: white;
     --cor-borda: gray;
     --cor-strong: #248df0;
+    --cor-bg-fade: #0000008a; 
 }
 * {
     margin: 0;
@@ -26,6 +29,79 @@ header {
     /* background: linear-gradient(149deg, rgba(0,55,162,1) 0%, rgba(39,129,244,1) 50%, rgba(255,255,255) 100%); */
     background: var(--cor-bg-header);
 }
+
+header .menu {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    cursor: pointer;
+    transition: .4s;
+    z-index: 3;
+}
+
+header .menu div {
+    width: 32px;
+    height: 3px;
+    margin: 5px;
+    background-color: white;
+    transition: .4s;
+}
+
+header nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    height: 100vh;
+    background: var(--cor-bg-nav);
+    text-align: center;
+    z-index: 2;
+    transition: opacity 5s ease;
+}
+
+header .visivel,
+header .fade.visivel {
+    display: flex;
+}
+
+header .fade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background: var(--cor-bg-fade);
+    pointer-events: all;
+}
+
+header nav ul {
+    width: 100%;
+}
+
+header nav li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    height: 100px;
+    width: 100%;
+    cursor: pointer;
+}
+
+header nav li:hover {
+    background: var(--cor-bg-nav-item-hover);
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+}
+
 header article {
     width: 100%;
     padding: 20px;

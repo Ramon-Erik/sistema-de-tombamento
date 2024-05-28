@@ -1,7 +1,7 @@
 <?php 
 session_start();
 if (!isset($_SESSION['adm'])) {
-    // header('location: ../../index.php');
+    header('location: ../../index.php');
 }?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,6 +13,20 @@ if (!isset($_SESSION['adm'])) {
 </head>
 <body>
     <header>
+        <div class="menu" id="menuHamburger">
+            <div class="linha1"></div>
+            <div class="linha2"></div>
+            <div class="linha3"></div>
+        </div>
+        <nav id="menu-links">
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="#">Skills</a></li>
+                <li><a href="#">Projetos</a></li>
+            </ul>
+        </nav>
+        <div class="fade"></div>
         <article class="title">
             <h1>Sistema de Tombamento</h1>
             <h2>Cadastrar ambiente</h2>
@@ -46,5 +60,6 @@ if (!isset($_SESSION['adm'])) {
             Desenvolvido pelo curso de Informática
         </p>
     </footer>
+    <script src="../../js/menu.js"></script>
 </body>
 </html>
