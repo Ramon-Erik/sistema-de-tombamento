@@ -79,7 +79,7 @@ if (!isset($_SESSION['adm'])) {
             <div class="bloco">
                 <div class="button"><a href="" class="icone"></a></div>
                 <div class="texto-func">
-                    <a href="../excluir/item/index.php">
+                    <a href="">
                         <h4>Sair da conta</h4>
                     </a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem ullam modi recusandae facilis obcaecati voluptatibus sint corrupti, quibusdam expedita.</p>
