@@ -39,7 +39,7 @@ if (isset($_SESSION['adm'])) {
             <div class="bloco">
                 <div class="button"><a href="sign-in/index.php" class="icone"></a></div>
                 <div class="texto-func">
-                    <a href="href="sign-in/index.php""><h4>Fazer login</h4></a>
+                    <a href="sign-in/index.php"><h4>Fazer login</h4></a>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem ullam modi recusandae facilis obcaecati voluptatibus sint corrupti, quibusdam expedita.</p>
                 </div>
             </div>
