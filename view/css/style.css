@@ -5,78 +5,107 @@
     --cor-bg-header: #0074de;
     /* para computdores (com imagem e cor): */
     --bg-header: #0074de;
-    --cor-bg-nav: #003465;
+    --cor-bg-nav: #1a4d7c;
     --cor-bg-nav-item-hover: #00284e;
-    --cor-bg-art: #0000006e;
+    --cor-bg-h1-header: #0000006e;
     --cor-bg-main: #f9fdff;
     --cor-bg-btn-enviar: #005db4;
     --cor-txt-btn-enviar: white;
     --cor-borda: gray;
+    --cor-bg-btn-ambiente: #dadada5e;
     --cor-strong: #248df0;
     --cor-bg-fade: #0000008a; 
+    --cor-icons: #0074de;
+    --cor-branca: white;
+    --cor-black: black;
 }
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body {font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}
+body {
+    font-family: Poppins, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+}
+
 header {
     display: flex;
     align-items: center;
     width: 100%;
     height: 300px;
-    /* background: linear-gradient(149deg, rgba(0,55,162,1) 0%, rgba(39,129,244,1) 50%, rgba(255,255,255) 100%); */
     background: var(--cor-bg-header);
 }
 
-header .menu {
+header .container {
     position: fixed;
     top: 10px;
     left: 10px;
-    padding: 5px;
-    cursor: pointer;
-    transition: .4s;
     z-index: 3;
 }
 
-header .menu div {
-    width: 32px;
-    height: 3px;
-    margin: 5px;
-    background-color: white;
-    transition: .4s;
+header .hamburger {
+    position: relative;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 10%;
+    background: var(--cor-bg-nav);
+}
+
+header .hamburger::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 1px;
+    width: 90%;
+    height: 20%;
+    border-radius: 20px;
+    background: var(--cor-branca);
+    transition: 1s ease-in-out;
+    z-index: 3;
+}
+
+header .hamburger::after {
+    content: '';
+    position: absolute;
+    top: 60%;
+    right: 1px;
+    width: 50%;
+    height: 20%;
+    border-radius: 20px;
+    background: var(--cor-branca);
+    transition: 1s ease-in-out;
+}
+
+header #menuHambId:checked ~ .container .hamburger::before {
+    transform: rotate(225deg);
+    top: 44%;
+}
+
+header #menuHambId:checked ~ .container .hamburger::after {
+    transform: rotate(-405deg);
+    top: 44%;
+    width: 90%;
 }
 
 header nav {
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
-    display: none;
+    left: -61%;
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 30vw;
+    width: 60vw;
     height: 100vh;
     background: var(--cor-bg-nav);
     text-align: center;
     z-index: 2;
-    transition: opacity 5s ease;
+    transition: .5s ease;
 }
 
-header .visivel,
-header .fade.visivel {
-    display: flex;
-}
-
-header .fade {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: none;
-    background: var(--cor-bg-fade);
-    pointer-events: all;
+header #menuHambId:checked ~ nav {
+    transform: translateX(100%);
 }
 
 header nav ul {
@@ -85,11 +114,11 @@ header nav ul {
 
 header nav li {
     display: flex;
-    justify-content: center;
     align-items: center;
-    list-style: none;
-    height: 100px;
+    height: 60px;
     width: 100%;
+    padding-left: 20px;
+    list-style: none;
     cursor: pointer;
 }
 
@@ -98,17 +127,41 @@ header nav li:hover {
 }
 
 header nav a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
     color: white;
     text-decoration: none;
 }
 
-header article {
-    width: 100%;
+header span.material-icons {
+    color: white;
+    font-size: 26px;
+}
+
+header #menuHambId:checked ~ .fade {
+    display: block;
+}
+
+header .fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background: var(--cor-bg-fade);
+    width: 100vw;
+    height: 100vh;
+}
+
+header div.titulo {
     padding: 20px;
+    width: 100%;
     text-align: center;
     color: white;
-    background: var(--cor-bg-art);
+    background: var(--cor-bg-h1-header);
 }
+
 main {
     max-width: 470px;
     margin: -5vh auto;
@@ -117,6 +170,11 @@ main {
     box-shadow: 3px 2px 10px 0px #00000040;
     border-radius: 5px;
 }
+
+main .titulo-pagina {
+    text-align: center;
+}
+
 main span.underline {
     text-decoration: underline;
 }
@@ -134,18 +192,54 @@ main div.bloco:not(:last-child) {
     margin-bottom: 10px;
 }
 main div.bloco div.button {
-    width: 35%;
+    width: 45px;
 }
-main div.bloco a.icone{
+main div.bloco a.icone {
     display: block;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    background: #0074de;
+}
+
+span.material-icons {
+    font-size: 45px;
+    color: var(--cor-icons);
 }
 
 main div.bloco div.texto-func {
     text-align: justify;
+}
+
+main a.btn-ambiente {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    color: var(--cor-black);
+    text-decoration: none;
+}
+
+main a.btn-ambiente:nth-child(even) {
+    background: var(--cor-bg-btn-ambiente);
+}
+
+/* ambiente-info */
+main .btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0 5px;
+}
+
+main .btns button,
+main .btns a {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background: transparent;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    border: .5px solid gray;
+    border-radius: 10px;
 }
 
 form .campo:not(:last-child) {
@@ -160,6 +254,11 @@ select {
     margin-top: 3px;
     border: 1px solid var(--cor-borda);
     border-radius: 5px;
+}
+
+main div.container-tabela {
+    width: calc(100% - 10px);
+    overflow-y: auto;
 }
 
 main table {
@@ -210,7 +309,7 @@ dialog::backdrop {
     background: rgba(0, 0, 0, 0.932);
 }
 
-dialog .btns {
+dialog .btns-dialog {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -222,19 +321,27 @@ main input[type=submit]{
     cursor: pointer;
 } 
 
-dialog .btns button, 
-dialog .btns input[type=submit] {
+dialog .btns-dialog button, 
+dialog .btns-dialog input[type=submit] {
     padding: 10px;
     border: 1px solid gray;
+    border-radius: 10px;
 }
 
-dialog .btns button {
+dialog .btns-dialog button {
     background: var(--cor-strong);
     color: white;
 }
 
-@media screen and (max-width: 470px) {
+/* @media screen and (max-width: 470px) {
+    header nav {
+        width: 30vw;
+        left: -40%;
+    }
+    header #menuHambId:checked ~ nav {
+        transform: translateX(103%);
+    }
     main {
         box-shadow: 3px 2px 10px 0px #00000040;
     }
-}
+} */

@@ -15,6 +15,7 @@ if (isset($_POST['apagar-item'])) {
     session_start();
     // echo $_POST['tombamento'];
     // echo '<pre>' . print_r($_POST);
-    $item->apagar_item($_POST['item']);
+    // echo '<pre>' . $_POST['id'], $_POST['nome'], $_POST['compl'];
+    $item->apagar_item($_POST['item'], $_POST['id'], $_POST['nome'], $_POST['compl']);
 }
 ?>

@@ -3,6 +3,11 @@ session_start();
 if (!isset($_SESSION['adm'])) {
     header('location: ../../index.php');
 }
+
+if ($_SESSION['ambiente-apagado'] === 'sim') {
+    $_SESSION['ambiente-apagado'] = 'não';
+    echo '<script>alert("Ambiente apagado com sucesso!")</script>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,9 +17,42 @@ if (!isset($_SESSION['adm'])) {
     <title>Apagar ambiente</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="shortcut icon" href="../../../recursos/icone/favicon1.png" type="image/x-icon">
 </head>
 <body>
     <header>
+    <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
+        <div class="container">
+            <label for="menuHambId">
+                <div class="hamburger"></div>
+            </label>
+        </div>
+        <nav id="menu-links">
+            <ul>
+                <li>
+                    <a href="../../menu-principal/index.php"><span class="material-icons">arrow_back</span>Voltar ao menu</a>
+                </li>
+                <li>
+                    <a href="../../relatorio/ambientes/index.php"><span class="material-icons">note_alt</span>Ver ambientes</a>
+                </li>
+                <li>
+                    <a href="../../relatorio/itens/index.php"><span class="material-icons">description</span>Ver itens</a>
+                </li>
+                <li>
+                    <a href="../../cadastrar/ambiente/index.php"><span class="material-icons">post_add</span>Cadastrar ambiente</a>
+                </li>
+                <li>
+                    <a href="../../cadastrar/item/index.php"><span class="material-icons">upload_file</span>Cadastrar item</a>
+                </li>
+                <li>
+                    <a href="../../excluir/item/index.php"><span class="material-icons">delete_forever</span>Apagar item</a>
+                </li>
+                <li>
+                    <a href="../../../control/control-login.php?exit=true"><span class="material-icons">logout</span>Sair</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="fade"></div>
         <article class="titulo">
             <h1>Sistema de Tombamento</h1>
             <h2>Excluir ambiente</h1>
@@ -48,7 +86,7 @@ if (!isset($_SESSION['adm'])) {
                 </div>
             </dialog>
             <div class="campo">
-                <button type="button" class="btn-submit" id="btnAtivarModalId"><span class="material-icons">delete</span> Apagar ambiente</button>
+                <button type="button" class="btn-submit" id="btnAtivarModalId">Apagar ambiente</button>
             </div>
         </form>
     </main>

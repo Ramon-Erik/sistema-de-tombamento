@@ -49,6 +49,10 @@ class Administrador {
             if ($resultado['senha'] == $senha) {
                 session_start();
                 $_SESSION['adm'] = $resultado['id'];
+                $_SESSION['item-cadastrado'] = 'indefinido';
+                $_SESSION['ambiente-cadastrado'] = 'indefinido';
+                $_SESSION['item-apagado'] = 'indefinido';
+                $_SESSION['ambiente-apagado'] = 'indefinido';
                 // echo $resultado['nome'];
                 // echo $_SESSION['adm'];
                 header("location:../view/menu-principal/index.php");

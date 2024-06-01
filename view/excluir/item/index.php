@@ -3,6 +3,11 @@ session_start();
 if (!isset($_SESSION['adm'])) {
     header('location: ../../index.php');
 }
+
+if ($_SESSION['item-apagado'] === 'sim') {
+    $_SESSION['item-apagado'] = 'não';
+    echo '<script>alert("Item apagado com sucesso!")</script>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,10 +15,43 @@ if (!isset($_SESSION['adm'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apagar um item</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
     <header>
+    <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
+        <div class="container">
+            <label for="menuHambId">
+                <div class="hamburger"></div>
+            </label>
+        </div>
+        <nav id="menu-links">
+            <ul>
+                <li>
+                    <a href="../../menu-principal/index.php"><span class="material-icons">arrow_back</span>Voltar ao menu</a>
+                </li>
+                <li>
+                    <a href="../../relatorio/ambientes/index.php"><span class="material-icons">note_alt</span>Ver ambientes</a>
+                </li>
+                <li>
+                    <a href="../../relatorio/itens/index.php"><span class="material-icons">description</span>Ver itens</a>
+                </li>
+                <li>
+                    <a href="../../cadastrar/ambiente/index.php"><span class="material-icons">post_add</span>Cadastrar ambiente</a>
+                </li>
+                <li>
+                    <a href="../../cadastrar/item/index.php"><span class="material-icons">upload_file</span>Cadastrar item</a>
+                </li>
+                <li>
+                    <a href="../../excluir/ambiente/index.php"><span class="material-icons">delete</span>Apagar ambiente</a>
+                </li>
+                <li>
+                    <a href="../../../control/control-login.php?exit=true"><span class="material-icons">logout</span>Sair</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="fade"></div>
         <article class="titulo">
             <h1>Sistema de Tombamnto</h1>
             <h2>Apagar item</h2>

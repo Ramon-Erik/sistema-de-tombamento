@@ -1,20 +1,31 @@
 const btnApagar = document.querySelector('#btnAtivarModalId');
 const btnCancelar = document.querySelector('#btnCancelarId');
-const modalDialog = document.querySelector('#modalConfirmacao');
+const dialogConfirmar = document.querySelector('#modalConfirmacao');
+const dialogErro = document.querySelector('#modalErro');
+let selectAmbiente;
+let radioBtn;
+
+function pegarValores() {
+    selectAmbiente = document.querySelector('#ambienteId')? document.querySelector('#ambienteId') : {value: 'null'};
+    radioBtn = document.querySelector('input[type=radio]:checked')? document.querySelector('input[type=radio]:checked') : null;
+}
 
 btnApagar.addEventListener('click', () => {
-    const selectAmbiente = document.querySelector('#ambienteId');
-    const radioBtn = document.querySelector('#ambienteId');
-    if (radioBtn == null || selectAmbiente.value == 'null') {
-        modalDialog.innerHTML = `<div class="texto"><h4>Excluir</h4><p>É necessário selecionar o item que deseja excluir.</p></div>` ;
+    pegarValores();
+    if (radioBtn == null & selectAmbiente.value == 'null') {
+        dialogErro.showModal();
+    } else {
+        dialogConfirmar.showModal();
     }
-    modalDialog.showModal();
 });
+
 btnCancelar.addEventListener("click", function () {
-    modalDialog.close();
+    dialogConfirmar.close();
 });
+
 window.addEventListener('click', (event) => {
-    if (event.target === modalDialog) {
-        modalDialog.close();
+    if (event.target === dialogConfirmar || event.target === dialogErro) {
+        dialogConfirmar.close();
+        dialogErro.close();
     }
 });

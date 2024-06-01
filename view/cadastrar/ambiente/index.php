@@ -2,38 +2,63 @@
 session_start();
 if (!isset($_SESSION['adm'])) {
     header('location: ../../index.php');
-}?>
+}
+
+if ($_SESSION['ambiente-cadastrado'] === 'sim') {
+    $_SESSION['ambiente-cadastrado'] = 'não';
+    echo '<script>alert("Ambiente cadastrado com sucesso!")</script>';
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar ambiente</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
     <header>
-        <div class="menu" id="menuHamburger">
-            <div class="linha1"></div>
-            <div class="linha2"></div>
-            <div class="linha3"></div>
+        <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
+        <div class="container">
+            <label for="menuHambId">
+                <div class="hamburger"></div>
+            </label>
         </div>
         <nav id="menu-links">
             <ul>
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Sobre</a></li>
-                <li><a href="#">Skills</a></li>
-                <li><a href="#">Projetos</a></li>
+                <li>
+                    <a href="../../menu-principal/index.php"><span class="material-icons">arrow_back</span>Voltar ao menu</a>
+                </li>
+                <li>
+                    <a href="../../relatorio/ambientes/index.php"><span class="material-icons">note_alt</span>Ver ambientes</a>
+                </li>
+                <li>
+                    <a href="../../relatorio/itens/index.php"><span class="material-icons">description</span>Ver itens</a>
+                </li>
+                <li>
+                    <a href="../../cadastrar/item/index.php"><span class="material-icons">upload_file</span>Cadastrar item</a>
+                </li>
+                <li>
+                    <a href="../../excluir/ambiente/index.php"><span class="material-icons">delete</span>Apagar ambiente</a>
+                </li>
+                <li>
+                    <a href="../../excluir/item/index.php"><span class="material-icons">delete_forever</span>Apagar item</a>
+                </li>
+                <li>
+                    <a href="../../../control/control-login.php?exit=true"><span class="material-icons">logout</span>Sair</a>
+                </li>
             </ul>
         </nav>
         <div class="fade"></div>
-        <article class="title">
+        <div class="titulo">
             <h1>Sistema de Tombamento</h1>
             <h2>Cadastrar ambiente</h2>
-        </article>
+        </div>
     </header>
     <main>
-        <form action="../../../control/control-cadastrar-ambiente.php" method="post">
+        <form action="../../../control/control-cadastrar-ambiente.php" method="post" autocomplete="off">
             <div class="campo">
                 <div class="linha-form">
                     <label for="nomeAmbienteId" class="required">Qual o nome do ambiente?</label>
@@ -60,6 +85,5 @@ if (!isset($_SESSION['adm'])) {
             Desenvolvido pelo curso de Informática
         </p>
     </footer>
-    <script src="../../js/menu.js"></script>
 </body>
 </html>

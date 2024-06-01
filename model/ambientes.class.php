@@ -12,7 +12,8 @@ class Ambiente {
             $consulta_feita->bindValue(':adm_responsavel', $adm_responsavel);
             $consulta_feita->execute();
             header('location: ../view/cadastrar/ambiente/index.php');
-            
+            session_start();
+            $_SESSION['ambiente-cadastrado'] = 'sim';
         } catch (PDOException $e) {
                 echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {
@@ -20,14 +21,25 @@ class Ambiente {
         }
     }
     
-    public function listar_ambientes() {
+    public function listar_ambientes($modo) {
         try {
             $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
-            $consulta = "select * from ambientes";
+            $consulta = "SELECT ambientes.id, ambientes.nome, ambientes.complemento, COUNT(itens.id) as total_itens from ambientes left join itens on ambientes.id = itens.id_ambiente GROUP by ambientes.id, ambientes.nome, ambientes.complemento;";
             $consulta_feita = $pdo->prepare($consulta);
             $consulta_feita->execute();
-            foreach ($consulta_feita as $ambiente) {
-                echo '<option value="'. $ambiente['id'] . '">'. $ambiente['nome'] . ' ' . $ambiente['complemento'] . '</option>';
+            if ($consulta_feita->rowCount()) {
+                foreach ($consulta_feita as $ambiente) {
+                    switch ($modo) {
+                        case 'opt': 
+                            echo '<option value="'. $ambiente['id'] . '">'. $ambiente['nome'] . ' ' . $ambiente['complemento'] . '</option>';
+                            break;
+                        case 'a': 
+                            echo "<a href=\"../ambiente-info/index.php?id=$ambiente[id]&nome=$ambiente[nome]&compl=$ambiente[complemento]\" class=\"btn-ambiente\"><span>$ambiente[nome] $ambiente[complemento]</span><span>itens: $ambiente[total_itens]</span></a>";
+                            break;
+                    }
+                }
+            } else {
+                echo '<p>Parece que não existem ambientes cadastrados ainda...';
             }
         } catch (PDOException $e) {
                 echo "Erro com a conexão " . $e;
@@ -43,9 +55,24 @@ class Ambiente {
             $consulta_feita = $pdo->prepare($consulta);
             $consulta_feita->bindValue(':id', $id);
             $consulta_feita->execute();
+            session_start();
+            $_SESSION['ambiente-apagado'] = 'sim';
             header('location: ../view/excluir/ambiente/index.php');
         } catch (PDOException $e) {
-            echo "Erro com a conexão <pre>" . $e;
+            // echo "Erro com a conexão <pre>" . $e;
+            switch (explode(' ', $e)[1]) {
+                case 'SQLSTATE[23000]:':
+                    $_SESSION['ambiente-apagado'] = 'não';
+                    $_SESSION['ambiente-apagado-msg'] = '<script>alert("Você não pode excluir esse ambiente, pois há um item armazenado nele.")</script>';
+                    break;
+                default:
+                    $_SESSION['ambiente-apagado'] = 'não';
+                    $_SESSION['ambiente-apagado-msg'] = '<script>alert("Algo de inesperado aconteceu!")</script>';
+                    break;
+                }
+                // echo explode(' ', $e)[1]. $_SESSION['ambiente-apagado'];
+                echo $_SESSION['ambiente-apagado-msg'];
+                echo '<script>window.location.href="../view/excluir/ambiente/index.php"</script>';
         } catch (Exception $e) {
             echo "Erro genérico... <pre>" . $e;
         }

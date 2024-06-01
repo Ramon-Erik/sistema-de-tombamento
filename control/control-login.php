@@ -6,4 +6,9 @@ if (isset($_POST['login'])) {
     $adm = new Administrador;
     $adm->login($nome, $senha);
 }
+if (isset($_GET['exit'])) {
+    session_start();
+    session_destroy();
+    header('location: ../view/index.php');
+}
 ?>

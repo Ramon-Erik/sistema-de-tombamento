@@ -1,6 +1,11 @@
 <?php 
-$caminho = __DIR__;
-require_once($caminho . '\..\recursos\lib_fpdf\fpdf.php');
+
+try {
+    $caminho = __DIR__;
+    require_once($caminho . '\..\recursos\lib_fpdf\fpdf.php');
+}  catch (Exception $e) {
+    echo "Erro genérico... <pre>" . $e;
+}
 
 class Item {
     public function cadastrar_item($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente, $id_responsavel) {
@@ -16,6 +21,8 @@ class Item {
             $consulta_feita->bindValue(":id_ambiente",$id_ambiente);
             $consulta_feita->bindValue(":adm_responsavel",$id_responsavel);
             $consulta_feita->execute();
+            session_start();
+            $_SESSION['item-cadastrado'] = 'sim';
             header('location: ../view/cadastrar/item/index.php');
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
@@ -29,8 +36,13 @@ class Item {
             $consulta = "SELECT nome from itens group by nome";
             $consulta_feita = $pdo->prepare($consulta);
             $consulta_feita->execute();
-            foreach ($consulta_feita as $nome_item) {
-                echo "<option>$nome_item[nome]</option>";
+            if ($consulta_feita->rowCount() > 0) {
+                foreach ($consulta_feita as $nome_item) {
+                    echo "<option>$nome_item[nome]</option>";
+                }
+
+            } else {
+                echo '<option>Não exstem itens cadastrados</option>';
             }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
@@ -41,11 +53,15 @@ class Item {
     public function listar_ambientes_itens() {
         try {
             $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
-            $consulta = "select ambientes.id, ambientes.nome, ambientes.complemento from itens inner join ambientes on itens.id_ambiente = ambientes.id group by ambientes.nome;";
+            $consulta = "select ambientes.id, ambientes.nome, ambientes.complemento from itens inner join ambientes on itens.id_ambiente = ambientes.id group by ambientes.complemento;";
             $consulta_feita = $pdo->prepare($consulta);
             $consulta_feita->execute();
-            foreach ($consulta_feita as $nome_item) {
-                echo "<option value=$nome_item[id]>$nome_item[nome] ($nome_item[complemento])</option>";
+            if ($consulta_feita->rowCount() > 0) {
+                foreach ($consulta_feita as $nome_item) {
+                    echo "<option value=$nome_item[id]>$nome_item[nome] ($nome_item[complemento])</option>";
+                }
+            } else {
+                echo '<option>Não exstem itens cadastrados</option>';
             }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
@@ -59,8 +75,12 @@ class Item {
             $consulta = "select administrador.id, administrador.nome from itens inner join administrador on itens.adm_responsavel = administrador.id group by administrador.nome;";
             $consulta_feita = $pdo->prepare($consulta);
             $consulta_feita->execute();
-            foreach ($consulta_feita as $nome_adm) {
-                echo "<option value=$nome_adm[id]>$nome_adm[nome]</option>";
+            if ($consulta_feita->rowCount() > 0) {
+                foreach ($consulta_feita as $nome_adm) {
+                    echo "<option value=$nome_adm[id]>$nome_adm[nome]</option>";
+                }
+            } else {
+                echo '<option>Não exstem itens cadastrados</option>';
             }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
@@ -109,7 +129,7 @@ class Item {
             $consulta_feita->bindValue(':id_ambiente', $id_ambiente);
             $consulta_feita->bindValue(':id_adm', $id_adm);
             $consulta_feita->execute();
-            if ($consulta_feita->rowCount() > 0) {
+            if ($consulta_feita->rowCount()) {
                 echo '<table><thead><tr><th scope="col"></th><th scope="col">Marca</th><th scope="col">Modelo</th><th scope="col">Estado</th><th scope="col">Tombamento</th></tr></thead>';
             } else {
                 echo '<div class="campo"><div class="linha-form"><p>Não existem itens cadastrados nos parâmetros passados.</p></div></div>';
@@ -125,7 +145,36 @@ class Item {
             echo "Erro genérico... <pre>" . $e;
         }
     }
-    public function apagar_item($id) {
+    public function listar_itens_v2($id_ambiente) {
+        try {
+            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
+            $consulta = "select itens.id, itens.modelo, itens.marca, itens.estado, itens.tombamento from itens where id_ambiente = :id_ambiente";
+            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita->bindValue(':id_ambiente', $id_ambiente);
+            $consulta_feita->execute();
+            if ($consulta_feita->rowCount()) {
+                echo '<div class="container-tabela"><table>';
+                echo '<thead><tr>';
+                echo '<th scope="col"></th>';
+                echo '<th scope="col">Marca</th>';
+                echo '<th scope="col">Modelo</th>';
+                echo '<th scope="col">Estado</th>';
+                echo '<th scope="col">Tombamento</th>';
+                echo '</tr></thead><tbody>';
+                foreach ($consulta_feita as $item) {
+                        echo "<tr><td><input type=\"radio\" name=\"item\" value=\"$item[id]\" required></td><td>$item[marca]</td><td>$item[modelo]</td><td>$item[estado]</td><td>$item[tombamento]</td></tr>";
+                }
+                echo '</tbody></table></div>';
+            } else {
+                echo '<div class="campo"><div class="linha-form"><p>Não existem itens cadastrados nos parâmetros passados.</p></div></div>';
+            }
+        } catch (PDOException $e) {
+            echo "Erro com a conexão <pre>" . $e;
+        } catch (Exception $e) {
+            echo "Erro genérico... <pre>" . $e;
+        }
+    }
+    public function apagar_item($id, $id_amb, $nome_amb, $compl) {
         try {
             // echo '<pre>' . print_r($id);
             $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
@@ -133,7 +182,9 @@ class Item {
             $consulta_feita = $pdo->prepare($consulta);
             $consulta_feita->bindValue(':id', $id);
             $consulta_feita->execute();
-            echo 'função chamada item "apagado" ' . $id;
+            $_SESSION['item-apagado'] = 'sim';
+            header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
+
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {

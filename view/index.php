@@ -11,6 +11,7 @@ if (isset($_SESSION['adm'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tombamento</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -23,24 +24,24 @@ if (isset($_SESSION['adm'])) {
     <main>
         <div class="funcionalidades">
             <div class="bloco">
-                <div class="button"><a href="relatorio/ambientes/index.php" class="icone"></a></div>
+                <div class="button"><a href="relatorio/ambientes/index.php" class="icone"> <span class="material-icons">note_alt</span></a></div>
                 <div class="texto-func">
                     <a href="relatorio/ambientes/index.php"><h4>Ver ambientes cadastrados</h4></a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem ullam modi recusandae facilis obcaecati voluptatibus sint corrupti, quibusdam expedita.</p>
+                    <p>Essa função permite aos usuários visualizar uma lista completa de todos os ambientes previamente registrados no sistema.</p>
                 </div>
             </div>
             <div class="bloco">
-                <div class="button"><a href="relatorio/itens/index.php" class="icone"></a></div>
+                <div class="button"><a href="relatorio/itens/index.php" class="icone"> <span class="material-icons">description</span></a></div>
                 <div class="texto-func">
                     <a href="relatorio/itens/index.php"><h4>Ver itens cadastrados</h4></a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem ullam modi recusandae facilis obcaecati voluptatibus sint corrupti, quibusdam expedita.</p>
+                    <p>Essa função permite aos usuários acessar uma lista completa de todos os itens previamente registrados no sistema.</p>
                 </div>
             </div>
             <div class="bloco">
-                <div class="button"><a href="sign-in/index.php" class="icone"></a></div>
+                <div class="button"><a href="sign-in/index.php" class="icone"> <span class="material-icons" >person</span></a></div>
                 <div class="texto-func">
                     <a href="sign-in/index.php"><h4>Fazer login</h4></a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores voluptatem ullam modi recusandae facilis obcaecati voluptatibus sint corrupti, quibusdam expedita.</p>
+                    <p>Ao fazer login, os usuários podem acessar os recursos e funcionalidades do sistema, garantindo segurança e controle de acesso aos dados e informações.</p>
                 </div>
             </div>
         </div>
