@@ -1,8 +1,13 @@
 <?php 
 session_start();
-// if (!isset($_SESSION['adm'])) {
-//     header('location: ../index.php');
-// }
+if (!isset($_SESSION['adm'])) {
+    header('location: ../../index.php');
+}
+
+if ($_SESSION['item-cadastrado']  === 'sim') {
+    $_SESSION['item-cadastrado'] = 'não';
+    echo '<script>alert("Item cadastrado com sucesso!")</script>';
+}
 
 if ($_SESSION['item-apagado'] === 'sim') {
     $_SESSION['item-apagado'] = 'não';

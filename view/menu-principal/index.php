@@ -1,5 +1,13 @@
 <?php 
 session_start();
+if (!isset($_SESSION['adm'])) {
+    header('location: ../../index.php');
+}
+
+if ($_SESSION['ambiente-cadastrado'] === 'sim') {
+    $_SESSION['ambiente-cadastrado'] = 'não';
+    echo '<script>alert("Ambiente cadastrado com sucesso!")</script>';
+}
 
 if ($_SESSION['ambiente-apagado'] === 'sim') {
     $_SESSION['ambiente-apagado'] = 'não';
