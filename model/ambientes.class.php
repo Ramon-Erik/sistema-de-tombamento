@@ -11,7 +11,7 @@ class Ambiente {
             $consulta_feita->bindValue(':complemento', $complemento);
             $consulta_feita->bindValue(':adm_responsavel', $adm_responsavel);
             $consulta_feita->execute();
-            header('location: ../view/cadastrar/ambiente/index.php');
+            header('location: ../view/menu-principal/index.php');
             session_start();
             $_SESSION['ambiente-cadastrado'] = 'sim';
         } catch (PDOException $e) {

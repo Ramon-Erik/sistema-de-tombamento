@@ -23,7 +23,8 @@ class Item {
             $consulta_feita->execute();
             session_start();
             $_SESSION['item-cadastrado'] = 'sim';
-            header('location: ../view/cadastrar/item/index.php');
+            // header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
+            header("location: ../view/cadastrar/ambiente/index.php?");
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {
@@ -184,7 +185,6 @@ class Item {
             $consulta_feita->execute();
             $_SESSION['item-apagado'] = 'sim';
             header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
-
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {
