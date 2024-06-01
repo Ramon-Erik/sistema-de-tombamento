@@ -17,9 +17,9 @@ if (isset($_SESSION['adm'])) {
 
 <body>
     <header>
-        <article class="titulo">
-            <h1>Sistema de Tombamento</h1>
-        </article>
+        <div class="titulo">
+            <h1>Sistema Patrimonial EEEP Salaberga</h1>
+        </div>
     </header>
     <main>
         <div class="funcionalidades">
