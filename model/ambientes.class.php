@@ -34,7 +34,13 @@ class Ambiente {
                             echo '<option value="'. $ambiente['id'] . '">'. $ambiente['nome'] . ' ' . $ambiente['complemento'] . '</option>';
                             break;
                         case 'a': 
-                            echo "<a href=\"../ambiente-info/index.php?id=$ambiente[id]&nome=$ambiente[nome]&compl=$ambiente[complemento]\" class=\"btn-ambiente\"><span>$ambiente[nome] $ambiente[complemento]</span><span>itens: $ambiente[total_itens]</span></a>";
+                            echo '<div class="linha-form"><div class="radio-ambiente">';
+                            echo "<input type=\"radio\" name=\"ambientes\" value=\"$ambiente[id]\"></div>";
+                            echo '<div class="btn-ambiente">';
+                            echo "<a href=\"../ambiente-info/index.php?id=$ambiente[id]&nome=$ambiente[nome]&compl=$ambiente[complemento]\">";
+                            echo "<span>$ambiente[nome] $ambiente[complemento]</span>";
+                            echo "<span>itens: $ambiente[total_itens]</span>";
+                            echo "</a></div></div>";
                             break;
                     }
                 }
@@ -57,7 +63,7 @@ class Ambiente {
             $consulta_feita->execute();
             session_start();
             $_SESSION['ambiente-apagado'] = 'sim';
-            header('location: ../view/excluir/ambiente/index.php');
+            header('location: ../view/menu-principal/index.php');
         } catch (PDOException $e) {
             // echo "Erro com a conexão <pre>" . $e;
             switch (explode(' ', $e)[1]) {
@@ -72,7 +78,7 @@ class Ambiente {
                 }
                 // echo explode(' ', $e)[1]. $_SESSION['ambiente-apagado'];
                 echo $_SESSION['ambiente-apagado-msg'];
-                echo '<script>window.location.href="../view/excluir/ambiente/index.php"</script>';
+                echo '<script>window.location.href="../view/menu-principal/index.php"</script>';
         } catch (Exception $e) {
             echo "Erro genérico... <pre>" . $e;
         }
