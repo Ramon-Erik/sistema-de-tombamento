@@ -40,13 +40,12 @@ class Administrador {
         try {
             $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = 'select * from administrador where nome = :usr and senha = :senha';
-            
             $consultar = $pdo->prepare($consulta);
             $consultar->bindValue(":usr", $usr);
             $consultar->bindValue(":senha", $senha);
             $consultar->execute();
             $resultado = $consultar->fetch(PDO::FETCH_ASSOC);
-            if ($resultado['senha'] == $senha) {
+            if ($consultar->rowCount()) {
                 session_start();
                 $_SESSION['adm'] = $resultado['id'];
                 $_SESSION['item-cadastrado'] = 'indefinido';
@@ -57,10 +56,8 @@ class Administrador {
                 // echo $_SESSION['adm'];
                 header("location:../view/menu-principal/index.php");
             } else  {
-                var_dump($resultado);
-                echo "<p>erro ao verificar senha. nome $usr senha $senha </p><pre>". print_r($resultado).'</pre>';
+                echo 'Senha incorreta.';
             }
-
         } catch (PDOException $e) {
             echo "Erro com a conexão " . $e;
         } catch (Exception $e) {
