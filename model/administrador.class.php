@@ -54,10 +54,12 @@ class Administrador {
                 $_SESSION['ambiente-apagado'] = 'indefinido';
                 // echo $resultado['nome'];
                 // echo $_SESSION['adm'];
-                header("location:../view/menu-principal/index.php");
+                // header("location:../view/menu-principal/index.php");
             } else  {
-                echo 'Senha incorreta.';
+                $_SESSION['adm'] = 'erro-senha';
+                // header("location:../view/sign-in/index.php");
             }
+            echo $_SESSION['adm'];
         } catch (PDOException $e) {
             echo "Erro com a conexão " . $e;
         } catch (Exception $e) {
