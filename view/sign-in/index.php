@@ -8,10 +8,10 @@
 </head>
 <body>
     <header>
-        <article class="title">
-            <h1>Sistema de Tombamento</h1>
+        <div class="titulo">
+            <h1>Sistema Patrimonial EEEP Salaberga</h1>
             <h2>Login</h2>
-        </article>
+        </div>
     </header>
     <main>
         <form action="../../control/control-login.php" method="post">
