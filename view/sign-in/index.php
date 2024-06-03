@@ -1,7 +1,8 @@
 <?php 
 session_start();
 if (isset($_SESSION['adm']) and $_SESSION['adm'] === 'erro-senha') {
-    echo '<script>alert("A senha informada errada!")</script>';
+    echo '<script>alert("A senha informada está errada!")</script>';
+    $_SESSION['adm'] = '...';
 }
 ?>
 <!DOCTYPE html>
