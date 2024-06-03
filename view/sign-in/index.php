@@ -1,10 +1,3 @@
-<?php 
-session_start();
-if (isset($_SESSION['adm']) and $_SESSION['adm'] === 'erro-senha') {
-    echo '<script>alert("A senha informada está errada!")</script>';
-    $_SESSION['adm'] = '...';
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,6 +7,13 @@ if (isset($_SESSION['adm']) and $_SESSION['adm'] === 'erro-senha') {
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+<?php 
+    session_start();
+    if (isset($_SESSION['adm']) and $_SESSION['adm'] === 'erro-senha') {
+        echo '<script>alert("A senha informada está errada!")</script>';
+        $_SESSION['adm'] = '...';
+    }
+    ?>
     <header>
         <div class="titulo">
             <h1>Sistema Patrimonial EEEP Salaberga</h1>
