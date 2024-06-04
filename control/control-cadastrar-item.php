@@ -12,6 +12,10 @@ if(isset($_POST['cadastrar_tombamento'])){
     $id_responsavel = $_SESSION['adm']; 
 
     $item = new Item;
-    $item->cadastrar_item($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente,$id_responsavel);
+    if ($_POST['tipo-ident'] === 'serie') {
+        $item->cadastrar_varios_itens();
+    } else {
+        $item->cadastrar_item($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente,$id_responsavel);
+    }
 }
 ?>

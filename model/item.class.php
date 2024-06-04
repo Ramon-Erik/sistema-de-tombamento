@@ -8,7 +8,32 @@ try {
 }
 
 class Item {
+    public $pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
+    
     public function cadastrar_item($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente, $id_responsavel) {
+        try {
+            $pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
+            $consulta = "insert into itens values(null,:nome,:estado,:modelo,:marca,:tombamento,:id_ambiente,:adm_responsavel)";
+            $consulta_feita=$pdo->prepare($consulta);
+            $consulta_feita->bindValue(":nome",$nome);
+            $consulta_feita->bindValue(":estado",$estado);
+            $consulta_feita->bindValue(":modelo",$modelo);
+            $consulta_feita->bindValue(":marca",$marca);
+            $consulta_feita->bindValue(":tombamento",$tombamento);
+            $consulta_feita->bindValue(":id_ambiente",$id_ambiente);
+            $consulta_feita->bindValue(":adm_responsavel",$id_responsavel);
+            $consulta_feita->execute();
+            session_start();
+            $_SESSION['item-cadastrado'] = 'sim';
+            // header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
+            header("location: ../view/cadastrar/ambiente/index.php?");
+        } catch (PDOException $e) {
+            echo "Erro com a conexão <pre>" . $e;
+        } catch (Exception $e) {
+            echo "Erro genérico... " . $e;
+        }
+    }
+    public function cadastrar_varios_itens($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente, $id_responsavel) {
         try {
             $pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
             $consulta = "insert into itens values(null,:nome,:estado,:modelo,:marca,:tombamento,:id_ambiente,:adm_responsavel)";
