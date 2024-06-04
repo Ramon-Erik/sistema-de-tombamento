@@ -1,7 +1,7 @@
 <?php 
 session_start();
-if (!isset($_SESSION['adm'])) {
-    header('location: ../../index.php');
+if (!isset($_SESSION['adm']) and isset($_SESSION['ambiente-cadastrado']) and isset($_SESSION['ambiente-apagado'])) {
+    header('location: ../sign-in/index.php');
 }
 
 if ($_SESSION['ambiente-cadastrado'] === 'sim') {
