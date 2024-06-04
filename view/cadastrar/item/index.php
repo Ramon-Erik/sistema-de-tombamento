@@ -118,11 +118,12 @@ if ($_SESSION['item-cadastrado']  === 'sim') {
                 </div>
                 <?php 
                     echo '<div class="linha-form">';
-                    echo '<select name="ambiente" id="ambienteId" disabled required>';
-                    if (isset($_GET['id_a'])) {
+                    echo '<select name="ambiente" id="ambienteId" required';
+                    if (isset($_GET['id_a']) and isset($_GET['nome']) and isset($_GET['compl'])) {
                         $id_a = $_GET['id_a'];
                         $nome = $_GET['nome'];
                         $compl = $_GET['compl'];
+                        echo " disabled>";
                         echo "<option value=\"$id_a\">$nome $compl</option>";
                     } else {
                         require_once('../../../model/ambientes.class.php');
