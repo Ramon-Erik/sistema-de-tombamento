@@ -14,9 +14,19 @@ tipoIdent.addEventListener('change', function () {
         case 'contagem':
             textoPlaceholder = '1, ou 2, ou 3...'
             break;
+        case 'serie':
+            numIdentId.type = 'number'
+            numIdentId.setAttribute('min', 1)
+            numIdentId.setAttribute('placeholder', `Informe a quatidade de itens a ser criado.`)
+            break;
         default:
             textoPlaceholder = 'Recarregue a página'
             break;
     }
-    numIdentId.setAttribute('placeholder', `Ex: ${textoPlaceholder}`)
+    if (textoPlaceholder !== undefined || valor !== 'serie') {
+        // console.log('aaaaaaaaa')
+        numIdentId.type = 'text'
+        numIdentId.value = null
+        numIdentId.setAttribute('placeholder', `Ex: ${textoPlaceholder}`)
+    }
 })

@@ -106,6 +106,7 @@ if ($_SESSION['item-cadastrado']  === 'sim') {
                         <option value="num-tomb">Número de tombamento</option>
                         <option value="num-serie">Número de série (S/N)</option>
                         <option value="contagem">Número de contagem</option>
+                        <option value="serie">Cadastrar vários</option>
                     </select>
                 </div>
                 <div class="linha-form">
