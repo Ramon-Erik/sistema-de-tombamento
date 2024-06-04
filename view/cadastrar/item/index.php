@@ -56,7 +56,7 @@ if ($_SESSION['item-cadastrado']  === 'sim') {
         </nav>
         <div class="fade"></div>
         <div class="titulo">
-            <h1>Sistema de Tombamnto</h1>
+            <h1>Sistema Patrimonial EEEP Salaberga</h1>
             <h2>Tombar item</h2>
         </div>
     </header>
