@@ -116,15 +116,19 @@ if ($_SESSION['item-cadastrado']  === 'sim') {
                 <div class="linha-form">
                     <label for="ambienteId">Em que ambiente esse item está?</label>
                 </div>
-                <div class="linha-form">
-                    <select name="ambiente" id="ambienteId" required>
-                        <?php 
+                <?php 
+                    echo '<div class="linha-form">';
+                    echo '<select name="ambiente" id="ambienteId" disabled required>';
+                    if (isset($_GET['id_a'])) {
+                        $id_a = $_GET['id_a'];
+                        echo "<option>$id_a</option>";
+                    } else {
                         require_once('../../../model/ambientes.class.php');
                         $amb = new Ambiente;
                         $amb->listar_ambientes('opt');
-                        ?> 
-                    </select>
-                </div>
+                    }
+                    echo '</select></div>';
+                ?>
             </div>
             <div class="campo">
                 <input type="submit" class="btn-submit" name="cadastrar_tombamento" value="Cadastrar">
