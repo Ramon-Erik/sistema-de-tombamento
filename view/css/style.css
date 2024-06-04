@@ -265,14 +265,6 @@ form .campo:not(:last-child) {
     margin-bottom: 12px;
 }
 
-input#numIdentId:not(:placeholder-shown) + label {
-    display: none;
-}
-
-input#numIdentId:placeholder-shown + label {
-    display: block;
-}
-
 form input[type=text],
 form input[type=number],
 form input[type=password], 
