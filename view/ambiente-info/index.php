@@ -60,7 +60,7 @@ if ($_SESSION['item-apagado'] === 'sim') {
             </dialog>
             <div class="btns">
                 <div class="btn-novo">
-                    <a href="../cadastrar/item/index.php?id_a=<?php echo $_GET['id']?>">
+                    <a href="../cadastrar/item/index.php?id_a=<?php echo $_GET['id'] . '&nome=' . $_GET['nome'] . '&compl=' . $_GET['compl'];?>">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
                         Novo item
                     </a>

@@ -121,7 +121,9 @@ if ($_SESSION['item-cadastrado']  === 'sim') {
                     echo '<select name="ambiente" id="ambienteId" disabled required>';
                     if (isset($_GET['id_a'])) {
                         $id_a = $_GET['id_a'];
-                        echo "<option>$id_a</option>";
+                        $nome = $_GET['nome'];
+                        $compl = $_GET['compl'];
+                        echo "<option value=\"$id_a\">$nome $compl</option>";
                     } else {
                         require_once('../../../model/ambientes.class.php');
                         $amb = new Ambiente;
