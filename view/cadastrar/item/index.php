@@ -126,6 +126,7 @@ if ($_SESSION['item-cadastrado']  === 'sim') {
                         $compl = $_GET['compl'];
                         echo " disabled>";
                         echo "<option value=\"$id_a\">$nome $compl</option>";
+                        echo "<input type=\"hidden\" name=\"ambiente\" value=\"$id_a\">";
                     } else {
                         require_once('../../../model/ambientes.class.php');
                         $amb = new Ambiente;

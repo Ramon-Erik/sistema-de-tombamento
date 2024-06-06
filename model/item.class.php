@@ -38,16 +38,21 @@ class Item {
     }
     public function cadastrar_varios_itens($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente, $id_responsavel) {
         try {
-            $consulta = "insert into itens values(null,:nome,:estado,:modelo,:marca,:tombamento,:id_ambiente,:adm_responsavel)";
-            $consulta_feita=$this->pdo->prepare($consulta);
-            $consulta_feita->bindValue(":nome",$nome);
-            $consulta_feita->bindValue(":estado",$estado);
-            $consulta_feita->bindValue(":modelo",$modelo);
-            $consulta_feita->bindValue(":marca",$marca);
-            $consulta_feita->bindValue(":tombamento",$tombamento);
-            $consulta_feita->bindValue(":id_ambiente",$id_ambiente);
-            $consulta_feita->bindValue(":adm_responsavel",$id_responsavel);
+            for ($i=1; $i < $tombamento; $i++) { 
+                $consulta_feita = $this->pdo->prepare("insert into itens values(null,:nome,:estado,:modelo,:marca,:tombamento,:id_ambiente,:adm_responsavel)");
+                $consulta_feita->bindValue(":nome",$nome);
+                $consulta_feita->bindValue(":estado",$estado);
+                $consulta_feita->bindValue(":modelo",$modelo);
+                $consulta_feita->bindValue(":marca",$marca);
+                $consulta_feita->bindValue(":tombamento",$tombamento);
+                $consulta_feita->bindValue(":id_ambiente",$id_ambiente);
+                $consulta_feita->bindValue(":adm_responsavel",$id_responsavel);
+                $consulta_feita->execute();
+            }
+            $ambiente = $this->pdo->prepare("select nome, complemento from ambientes where id = :id_ambiente");
+            $ambiente->bindValue(":id_ambiente", $id_ambiente);
             $consulta_feita->execute();
+
             session_start();
             $_SESSION['item-cadastrado'] = 'sim';
             // header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
