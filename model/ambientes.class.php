@@ -18,7 +18,7 @@ class Ambiente {
             $consulta_feita->execute();
             $ultimo_id = $this->pdo->lastInsertId();
             echo $ultimo_id;
-            header("location: ../view/menu-principal/index.php?id=$ultimo_id&nome=$nome&compl=$complemento");
+            header("location: ../view/ambiente-info/index.php?id=$ultimo_id&nome=$nome&compl=$complemento");
             session_start();
             $_SESSION['ambiente-cadastrado'] = 'sim';
         } catch (PDOException $e) {
