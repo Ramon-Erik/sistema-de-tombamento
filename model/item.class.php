@@ -8,13 +8,16 @@ try {
 }
 
 class Item {
-    public $pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
+    public $pdo;
+
+    public function __construct() {
+        $this->pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
+    }
     
     public function cadastrar_item($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente, $id_responsavel) {
         try {
-            $pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
             $consulta = "insert into itens values(null,:nome,:estado,:modelo,:marca,:tombamento,:id_ambiente,:adm_responsavel)";
-            $consulta_feita=$pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(":nome",$nome);
             $consulta_feita->bindValue(":estado",$estado);
             $consulta_feita->bindValue(":modelo",$modelo);
@@ -35,9 +38,8 @@ class Item {
     }
     public function cadastrar_varios_itens($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente, $id_responsavel) {
         try {
-            $pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
             $consulta = "insert into itens values(null,:nome,:estado,:modelo,:marca,:tombamento,:id_ambiente,:adm_responsavel)";
-            $consulta_feita=$pdo->prepare($consulta);
+            $consulta_feita=$this->pdo->prepare($consulta);
             $consulta_feita->bindValue(":nome",$nome);
             $consulta_feita->bindValue(":estado",$estado);
             $consulta_feita->bindValue(":modelo",$modelo);
@@ -58,9 +60,8 @@ class Item {
     }
     public function listar_nomes_itens() {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "SELECT nome from itens group by nome";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount() > 0) {
                 foreach ($consulta_feita as $nome_item) {
@@ -78,9 +79,8 @@ class Item {
     }
     public function listar_ambientes_itens() {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "select ambientes.id, ambientes.nome, ambientes.complemento from itens inner join ambientes on itens.id_ambiente = ambientes.id group by ambientes.complemento;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount() > 0) {
                 foreach ($consulta_feita as $nome_item) {
@@ -97,9 +97,8 @@ class Item {
     }
     public function listar_adms_itens() {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "select administrador.id, administrador.nome from itens inner join administrador on itens.adm_responsavel = administrador.id group by administrador.nome;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount() > 0) {
                 foreach ($consulta_feita as $nome_adm) {
@@ -116,9 +115,8 @@ class Item {
     }
     public function pesquisar_nome_ambiente($id) {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "select ambientes.nome, ambientes.complemento from itens inner join ambientes on itens.id_ambiente = :id group by ambientes.nome;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':id', $id);
             $consulta_feita->execute();
             foreach ($consulta_feita as $nome_ambiente_item) {
@@ -132,9 +130,8 @@ class Item {
     }
     public function pesquisar_nome_adm($id) {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "select administrador.nome from itens inner join administrador on administrador.id = :id group by administrador.nome;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':id', $id);
             $consulta_feita->execute();
             foreach ($consulta_feita as $nome_adm_item) {
@@ -148,9 +145,8 @@ class Item {
     }
     public function listar_itens($nome, $id_ambiente, $id_adm) {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "select itens.id, itens.modelo, itens.marca, itens.estado, itens.tombamento from itens where id_ambiente = :id_ambiente and adm_responsavel = :id_adm and nome = :nome;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':nome', $nome);
             $consulta_feita->bindValue(':id_ambiente', $id_ambiente);
             $consulta_feita->bindValue(':id_adm', $id_adm);
@@ -173,9 +169,8 @@ class Item {
     }
     public function listar_itens_v2($id_ambiente) {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "select itens.id, itens.modelo, itens.marca, itens.estado, itens.tombamento from itens where id_ambiente = :id_ambiente";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':id_ambiente', $id_ambiente);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount()) {
@@ -203,9 +198,8 @@ class Item {
     public function apagar_item($id, $id_amb, $nome_amb, $compl) {
         try {
             // echo '<pre>' . print_r($id);
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "DELETE FROM `itens` WHERE id = :id;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':id', $id);
             $consulta_feita->execute();
             $_SESSION['item-apagado'] = 'sim';
@@ -218,9 +212,8 @@ class Item {
     }
     public function relatar_itens() {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "SELECT itens.id, itens.nome,itens.estado, itens.modelo, itens.marca, itens.tombamento, ambientes.nome, administrador.nome FROM `itens` inner join administrador on itens.adm_responsavel = administrador.id inner join ambientes on itens.id_ambiente = ambientes.id;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->execute();
 
             $pdf = new FPDF();
