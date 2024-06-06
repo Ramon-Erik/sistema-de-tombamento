@@ -17,7 +17,7 @@ tipoIdent.addEventListener('change', function () {
         case 'serie':
             numIdentId.type = 'number'
             numIdentId.setAttribute('min', 1)
-            numIdentId.setAttribute('placeholder', `Informe a quatidade de itens a ser criado.`)
+            numIdentId.setAttribute('placeholder', `Informe a quatidade de itens a serem criados.`)
             break;
         default:
             textoPlaceholder = 'Recarregue a página'
