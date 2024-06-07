@@ -44,19 +44,21 @@ class Item {
                 $consulta_feita->bindValue(":estado",$estado);
                 $consulta_feita->bindValue(":modelo",$modelo);
                 $consulta_feita->bindValue(":marca",$marca);
-                $consulta_feita->bindValue(":tombamento",$tombamento);
+                $consulta_feita->bindValue(":tombamento",$i);
                 $consulta_feita->bindValue(":id_ambiente",$id_ambiente);
                 $consulta_feita->bindValue(":adm_responsavel",$id_responsavel);
                 $consulta_feita->execute();
             }
             $ambiente = $this->pdo->prepare("select nome, complemento from ambientes where id = :id_ambiente");
             $ambiente->bindValue(":id_ambiente", $id_ambiente);
-            $consulta_feita->execute();
-
+            $ambiente->execute();
             session_start();
             $_SESSION['item-cadastrado'] = 'sim';
-            // header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
-            header("location: ../view/cadastrar/ambiente/index.php?");
+            foreach ($ambiente as $value) {
+                header("location: ../view/ambiente-info/index.php?id=$id_ambiente&nome=$value[nome]&compl=$value[complemento]");
+            }
+
+            // header("location: ../view/cadastrar/ambiente/index.php?");
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {
@@ -174,7 +176,7 @@ class Item {
     }
     public function listar_itens_v2($id_ambiente) {
         try {
-            $consulta = "select itens.id, itens.modelo, itens.marca, itens.estado, itens.tombamento from itens where id_ambiente = :id_ambiente";
+            $consulta = "select itens.id, itens.nome, itens.modelo, itens.marca, itens.estado, itens.tombamento from itens where id_ambiente = :id_ambiente";
             $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':id_ambiente', $id_ambiente);
             $consulta_feita->execute();
@@ -182,13 +184,14 @@ class Item {
                 echo '<div class="container-tabela"><table>';
                 echo '<thead><tr>';
                 echo '<th scope="col"></th>';
+                echo '<th scope="col">Nome</th>';
                 echo '<th scope="col">Marca</th>';
                 echo '<th scope="col">Modelo</th>';
                 echo '<th scope="col">Estado</th>';
                 echo '<th scope="col">Tombamento</th>';
                 echo '</tr></thead><tbody>';
                 foreach ($consulta_feita as $item) {
-                        echo "<tr><td><input type=\"radio\" name=\"item\" value=\"$item[id]\" required></td><td>$item[marca]</td><td>$item[modelo]</td><td>$item[estado]</td><td>$item[tombamento]</td></tr>";
+                        echo "<tr><td><input type=\"radio\" name=\"item\" value=\"$item[id]\" required></td><td>$item[nome]</td><td>$item[marca]</td><td>$item[modelo]</td><td>$item[estado]</td><td>$item[tombamento]</td></tr>";
                 }
                 echo '</tbody></table></div>';
             } else {

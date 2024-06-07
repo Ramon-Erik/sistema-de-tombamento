@@ -3,14 +3,7 @@ session_start();
 if (!isset($_SESSION['adm'])) {
     header('location: ../../index.php');
 }
-
-if ($_SESSION['item-cadastrado']  === 'sim') {
-    $_SESSION['item-cadastrado'] = 'não';
-    echo '<script>alert("Item cadastrado com sucesso!")</script>';
-}
-
 // echo $_SESSION['item-cadastrado']
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -93,7 +86,7 @@ if ($_SESSION['item-cadastrado']  === 'sim') {
                 <div class="linha-form">
                     <select name="estado" id="estadotId" required>
                             <option value="conservado">Conservado</option>
-                            <option value="n-conservao">Não conervado</option>
+                            <option value="nao conservao">Não conervado</option>
                     </select>
                 </div>
             </div>
