@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if (!isset($_SESSION['adm']) and isset($_SESSION['ambiente-cadastrado']) and isset($_SESSION['ambiente-apagado'])) {
+if (!isset($_SESSION['adm']) and !isset($_SESSION['ambiente-cadastrado']) and !isset($_SESSION['ambiente-apagado'])) {
     header('location: ../sign-in/index.php');
 }
 
