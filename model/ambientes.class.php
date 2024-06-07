@@ -2,16 +2,23 @@
 $caminho = __DIR__;
 require_once($caminho . '\..\recursos\lib_fpdf\fpdf.php');
 class Ambiente {
+    public $pdo;
+
+    public function __construct() {
+        $this->pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
+    }
+
     public function cadastrar_ambientes($nome, $complemento, $adm_responsavel) {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "insert into ambientes values(null, :nome, :complemento, :adm_responsavel)";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':nome', $nome);
             $consulta_feita->bindValue(':complemento', $complemento);
             $consulta_feita->bindValue(':adm_responsavel', $adm_responsavel);
             $consulta_feita->execute();
-            header('location: ../view/menu-principal/index.php');
+            $ultimo_id = $this->pdo->lastInsertId();
+            echo $ultimo_id;
+            header("location: ../view/ambiente-info/index.php?id=$ultimo_id&nome=$nome&compl=$complemento");
             session_start();
             $_SESSION['ambiente-cadastrado'] = 'sim';
         } catch (PDOException $e) {
@@ -23,9 +30,8 @@ class Ambiente {
     
     public function listar_ambientes($modo) {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "SELECT ambientes.id, ambientes.nome, ambientes.complemento, COUNT(itens.id) as total_itens from ambientes left join itens on ambientes.id = itens.id_ambiente GROUP by ambientes.id, ambientes.nome, ambientes.complemento;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount()) {
                 foreach ($consulta_feita as $ambiente) {
@@ -56,9 +62,8 @@ class Ambiente {
     public function apagar_ambiente($id) {
         try {
             // echo '<pre>' . print_r($id);
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "DELETE FROM `ambientes` WHERE id = :id;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->bindValue(':id', $id);
             $consulta_feita->execute();
             session_start();
@@ -85,9 +90,8 @@ class Ambiente {
     }
     public function relatorio_ambientes() {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "SELECT ambientes.id, ambientes.nome,ambientes.complemento, administrador.nome FROM `ambientes` inner join administrador on ambientes.adm_responsavel = administrador.id;";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->execute();
 
             $pdf = new FPDF();

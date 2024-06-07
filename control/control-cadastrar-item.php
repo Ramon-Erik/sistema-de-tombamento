@@ -13,7 +13,7 @@ if(isset($_POST['cadastrar_tombamento'])){
 
     $item = new Item;
     if ($_POST['tipo-ident'] === 'serie') {
-        $item->cadastrar_varios_itens();
+        $item->cadastrar_varios_itens($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente,$id_responsavel, []);
     } else {
         $item->cadastrar_item($nome, $estado,$modelo,$marca,$tombamento,$id_ambiente,$id_responsavel);
     }
