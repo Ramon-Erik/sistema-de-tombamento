@@ -1,10 +1,14 @@
 <?php 
 class Administrador {
+    public $pdo;
+    public function __construct() {
+        $this->pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
+    }
+
     public function listar_adms () {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = "select nome from administrador";
-            $consulta_feita = $pdo->prepare($consulta);
+            $consulta_feita = $this->pdo->prepare($consulta);
             $consulta_feita->execute();
 
             $cursos = [];
@@ -38,9 +42,8 @@ class Administrador {
     }
     public function login($usr,$senha) {
         try {
-            $pdo = new pdo("mysql:host=localhost; dbname=sis_tombamento", "root", "");
             $consulta = 'select * from administrador where nome = :usr and senha = :senha';
-            $consultar = $pdo->prepare($consulta);
+            $consultar = $this->pdo->prepare($consulta);
             $consultar->bindValue(":usr", $usr);
             $consultar->bindValue(":senha", $senha);
             $consultar->execute();
