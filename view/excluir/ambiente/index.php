@@ -1,14 +1,3 @@
-<?php 
-session_start();
-if (!isset($_SESSION['adm'])) {
-    header('location: ../../index.php');
-}
-
-if ($_SESSION['ambiente-apagado'] === 'sim') {
-    $_SESSION['ambiente-apagado'] = 'não';
-    echo '<script>alert("Ambiente apagado com sucesso!")</script>';
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,9 +6,19 @@ if ($_SESSION['ambiente-apagado'] === 'sim') {
     <title>Apagar ambiente</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="shortcut icon" href="../../../recursos/icone/favicon1.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../recursos/icone/favicon.png" type="image/x-icon">
 </head>
 <body>
+    <?php 
+    session_start();
+    if (!isset($_SESSION['adm'])) {
+        header('location: ../../index.php');
+    }
+    if ($_SESSION['ambiente-apagado'] === 'sim') {
+        $_SESSION['ambiente-apagado'] = 'não';
+        echo '<script>alert("Ambiente apagado com sucesso!")</script>';
+    }
+    ?>
     <header>
     <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
         <div class="container">
@@ -53,10 +52,10 @@ if ($_SESSION['ambiente-apagado'] === 'sim') {
             </ul>
         </nav>
         <div class="fade"></div>
-        <article class="titulo">
+        <div class="titulo">
             <h1>Sistema de Tombamento</h1>
             <h2>Excluir ambiente</h1>
-        </article>
+        </div>
     </header>
     <main>
         <form action="../../../control/control-excluir-ambiente.php" method="post">
@@ -70,19 +69,25 @@ if ($_SESSION['ambiente-apagado'] === 'sim') {
                         <?php 
                         require_once('../../../model/ambientes.class.php');
                         $amb = new Ambiente;
-                        $amb->listar_ambientes();
+                        $amb->listar_ambientes('opt');
                         ?>
                     </select>
                 </div>
             </div>
             <dialog id="modalConfirmacao">
                 <div class="texto">
-                    <h4>Excluir item</h4>
-                    <p>Tem certexa que deseja <strong>excluir</strong> esse item? Não será possivel desfazer essa ação.</p>
+                    <h4>Excluir ambiente</h4>
+                    <p>Tem certexa que deseja <strong>excluir</strong> esse ambiente? Não será possivel desfazer essa ação.</p>
                 </div>
-                <div class="btns">
-                    <input type="submit" name="apagar-ambiente" value="Apagar item">
+                <div class="btns-dialog">
+                    <input type="submit" name="apagar-ambiente" value="Apagar ambiente">
                     <button type="button" id="btnCancelarId">Cancelar</button>
+                </div>
+            </dialog>
+            <dialog id="modalErro">
+                <div class="texto">
+                    <h4>Excluir ambiente</h4>
+                    <p>É necessário selecionar o ambiente que deseja excluir.</p>
                 </div>
             </dialog>
             <div class="campo">

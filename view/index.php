@@ -13,6 +13,7 @@ if (isset($_SESSION['adm'])) {
     <title>Tombamento</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="../recursos/icone/favicon.png" type="image/x-icon">
 </head>
 
 <body>

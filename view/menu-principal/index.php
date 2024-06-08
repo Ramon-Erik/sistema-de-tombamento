@@ -1,25 +1,57 @@
-<?php 
-session_start();
-if (!isset($_SESSION['adm']) and !isset($_SESSION['ambiente-cadastrado']) and !isset($_SESSION['ambiente-apagado'])) {
-    header('location: ../sign-in/index.php');
-}
-
-if ($_SESSION['ambiente-apagado'] === 'sim') {
-    $_SESSION['ambiente-apagado'] = 'não';
-    echo '<script>alert("Ambiente apagado com sucesso!")</script>';
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu principal</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../../recursos/icone/favicon.png" type="image/x-icon">
 </head>
 <body>
+    <?php 
+    session_start();
+    if (!isset($_SESSION['adm']) and !isset($_SESSION['ambiente-cadastrado']) and !isset($_SESSION['ambiente-apagado'])) {
+        header('location: ../sign-in/index.php');
+    }
+    if ($_SESSION['ambiente-apagado'] === 'sim') {
+        $_SESSION['ambiente-apagado'] = 'não';
+        echo '<script>alert("Ambiente apagado com sucesso!")</script>';
+    }
+    ?>
     <header>
+        <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
+        <div class="container">
+            <label for="menuHambId">
+                <div class="hamburger"></div>
+            </label>
+        </div>
+        <nav id="menu-links">
+            <ul>
+                <li>
+                    <a href="../relatorio/ambientes/index.php"><span class="material-icons">note_alt</span>Ver ambientes</a>
+                </li>
+                <li>
+                    <a href="../relatorio/itens/index.php"><span class="material-icons">description</span>Ver itens</a>
+                </li>
+                <li>
+                    <a href="../cadastrar/ambiente/index.php"><span class="material-icons">post_add</span>Cadastrar ambiente</a>
+                </li>
+                <li>
+                    <a href="../cadastrar/item/index.php"><span class="material-icons">upload_file</span>Cadastrar item</a>
+                </li>
+                <li>
+                    <a href="../excluir/ambiente/index.php"><span class="material-icons">delete</span>Apagar ambiente</a>
+                </li>
+                <li>
+                    <a href="../excluir/item/index.php"><span class="material-icons">delete_forever</span>Apagar item</a>
+                </li>
+                <li>
+                    <a href="../../control/control-login.php?exit=true"><span class="material-icons">logout</span>Sair</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="fade"></div>
         <div class="titulo">
             <h1>Sistema Patrimonial EEEP. Salaberga</h1>
         </div>

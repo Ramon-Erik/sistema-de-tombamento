@@ -1,14 +1,3 @@
-<?php 
-session_start();
-if (!isset($_SESSION['adm'])) {
-    header('location: ../../index.php');
-}
-
-if ($_SESSION['ambiente-cadastrado'] === 'sim') {
-    $_SESSION['ambiente-cadastrado'] = 'não';
-    echo '<script>alert("Ambiente cadastrado com sucesso!")</script>';
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,8 +6,20 @@ if ($_SESSION['ambiente-cadastrado'] === 'sim') {
     <title>Cadastrar ambiente</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="shortcut icon" href="../../../recursos/icone/favicon.png" type="image/x-icon">
 </head>
 <body>
+    <?php 
+    session_start();
+    if (!isset($_SESSION['adm'])) {
+        header('location: ../../index.php');
+    }
+
+    if ($_SESSION['ambiente-cadastrado'] === 'sim') {
+        $_SESSION['ambiente-cadastrado'] = 'não';
+        echo '<script>alert("Ambiente cadastrado com sucesso!")</script>';
+    }
+    ?>
     <header>
         <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
         <div class="container">

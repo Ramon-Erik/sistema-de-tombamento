@@ -3,7 +3,6 @@ session_start();
 if (!isset($_SESSION['adm'])) {
     header('location: ../../index.php');
 }
-// echo $_SESSION['item-cadastrado']
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -13,10 +12,11 @@ if (!isset($_SESSION['adm'])) {
     <title>Faça o tombamnto dos itens</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="shortcut icon" href="../../../recursos/icone/favicon.png" type="image/x-icon">
 </head>
 <body>
     <header>
-    <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
+        <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
         <div class="container">
             <label for="menuHambId">
                 <div class="hamburger"></div>
@@ -86,7 +86,7 @@ if (!isset($_SESSION['adm'])) {
                 <div class="linha-form">
                     <select name="estado" id="estadotId" required>
                             <option value="conservado">Conservado</option>
-                            <option value="nao conservao">Não conervado</option>
+                            <option value="nao conservado">Não conervado</option>
                     </select>
                 </div>
             </div>
