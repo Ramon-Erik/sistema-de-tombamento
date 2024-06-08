@@ -9,7 +9,6 @@ try {
 
 class Item {
     public $pdo;
-
     public function __construct() {
         $this->pdo = new PDO("mysql:host=localhost; dbname=sis_tombamento","root","");
     }
@@ -191,11 +190,22 @@ class Item {
                 echo '<th scope="col">Tombamento</th>';
                 echo '</tr></thead><tbody>';
                 foreach ($consulta_feita as $item) {
-                        echo "<tr><td><input type=\"radio\" name=\"item\" value=\"$item[id]\" required></td><td>$item[nome]</td><td>$item[marca]</td><td>$item[modelo]</td><td>$item[estado]</td><td>$item[tombamento]</td></tr>";
+                    echo "<tr>";
+                    echo "<td>";
+                        echo "<input type=\"radio\" name=\"item\" value=\"$item[id]\" required>";
+                    echo "</td>";
+                    echo "<td>$item[nome]</td>";
+                    echo "<td>$item[marca]</td>";
+                    echo "<td>$item[modelo]</td>";
+                    echo "<td>$item[estado]</td>";
+                    echo "<td>$item[tombamento]</td></tr>";
+                    echo "</tr>";
                 }
                 echo '</tbody></table></div>';
             } else {
-                echo '<div class="campo"><div class="linha-form"><p>Não existem itens cadastrados nos parâmetros passados.</p></div></div>';
+                echo '<div class="campo">';
+                echo '<div class="linha-form"><p>Não existem itens cadastrados nos parâmetros passados.</p></div>';
+                echo '</div>';
             }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
@@ -211,7 +221,16 @@ class Item {
             $consulta_feita->bindValue(':id', $id);
             $consulta_feita->execute();
             $_SESSION['item-apagado'] = 'sim';
-            header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
+            if ($compl !== 'undefined') {
+                header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
+            } else {
+                $consulta_feita = $this->pdo->prepare('select nome, complemento from ambientes where id = :id');
+                $consulta_feita->bindValue(':id', $id);
+                $consulta_feita->execute();
+                foreach ($consulta_feita as $value) {
+                    header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$value[nome]&compl=$value[complemento]");
+                }
+            }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {
