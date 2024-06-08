@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizar ambiente</title>
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="shortcut icon" href="../../recursos/icone/favicon.png" type="image/x-icon">
@@ -108,7 +112,6 @@
                 </div>
             </div>
             <section class="ambientes">
-                <!-- <p>e também vai aparecer os itens em sanfona com nome, marca modelo e embaixo o numero de tombamento, o estado e o adm_responsavel</p> -->
                 <?php
                     require_once('../../model/item.class.php');
                     $item = new Item;
@@ -125,6 +128,20 @@
     <footer>
         <p>Desenvolvido pelo curso de Informática</p>
     </footer>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>  
+    <script src="../js/tabelas.js">
+        // $(document).ready( function () {
+        //     $('#itensAmbiente').DataTable( {
+        //         "language": {
+        //             "url": "url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json'"
+        //         }
+        //     });
+        // } );
+        // var $ = require('jquery');
+        // var DataTable = require('datatables.net')(window, $);
+        
+    </script>
     <script src="../js/script.js"></script>
 </body>
 </html>
