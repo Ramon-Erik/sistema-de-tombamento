@@ -1,14 +1,3 @@
-<?php 
-session_start();
-if (!isset($_SESSION['adm'])) {
-    header('location: ../../index.php');
-}
-
-if ($_SESSION['item-apagado'] === 'sim') {
-    $_SESSION['item-apagado'] = 'não';
-    echo '<script>alert("Item apagado com sucesso!")</script>';
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,8 +6,20 @@ if ($_SESSION['item-apagado'] === 'sim') {
     <title>Apagar um item</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="shortcut icon" href="../../../srecursos/icone/favicon.png" type="image/x-icon">
 </head>
 <body>
+    <?php 
+    session_start();
+    if (!isset($_SESSION['adm'])) {
+        header('location: ../../index.php');
+    }
+
+    if ($_SESSION['item-apagado'] === 'sim') {
+        $_SESSION['item-apagado'] = 'não';
+        echo '<script>alert("Item apagado com sucesso!")</script>';
+    }
+    ?>
     <header>
     <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
         <div class="container">
@@ -52,10 +53,10 @@ if ($_SESSION['item-apagado'] === 'sim') {
             </ul>
         </nav>
         <div class="fade"></div>
-        <article class="titulo">
+        <div class="titulo">
             <h1>Sistema de Tombamnto</h1>
             <h2>Apagar item</h2>
-        </article>
+        </div>
     </header>
     <main>
         <form action="../../../control/control-excluir-item.php" method="post">

@@ -1,9 +1,3 @@
-<?php 
-session_start();
-if (!isset($_SESSION['adm'])  and !isset($_SESSION['nome-item']) and !isset($_SESSION['id_adm-item']) and !isset($_SESSION['id_ambiente-item']) and !isset($_SESSION['nome-ambiente-item']) and !isset($_SESSION['nome-adm-item']) ) {
-    header('location: ../../index.php');
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,8 +6,15 @@ if (!isset($_SESSION['adm'])  and !isset($_SESSION['nome-item']) and !isset($_SE
     <title>Apagar um item</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="shortcut icon" href="../../../recursos/icone/favicon.png" type="image/x-icon">
 </head>
 <body>
+    <?php 
+    session_start();
+    if (!isset($_SESSION['adm'])  and !isset($_SESSION['nome-item']) and !isset($_SESSION['id_adm-item']) and !isset($_SESSION['id_ambiente-item']) and !isset($_SESSION['nome-ambiente-item']) and !isset($_SESSION['nome-adm-item']) ) {
+        header('location: ../../index.php');
+    }
+    ?>
     <header>
     <input type="checkbox" name="menuHamb" id="menuHambId" style="display:none;">
         <div class="container">
@@ -47,14 +48,15 @@ if (!isset($_SESSION['adm'])  and !isset($_SESSION['nome-item']) and !isset($_SE
             </ul>
         </nav>
         <div class="fade"></div>
-        <article class="titulo">
+        <div class="titulo">
             <h1>Sistema de Tombamnto</h1>
             <h2>Apagar item</h2>
-        </article>
+        </div>
     </header>
     <main>
         <?php 
-        echo '<h3>Mostrando resultados para <span class="underline">' . $_SESSION['nome-item'] . '</span class="underline"> em <span class="underline">' . $_SESSION['nome-ambiente-item'] . '</span class="underline"> cadastrados por <span class="underline">' . $_SESSION['nome-adm-item'] . '</span class="underline"></h3>'?>
+        echo '<h3>Mostrando resultados para <span class="underline">' . $_SESSION['nome-item'] . '</span class="underline"> em <span class="underline">' . $_SESSION['nome-ambiente-item'] . '</span class="underline"> cadastrados por <span class="underline">' . $_SESSION['nome-adm-item'] . '</span class="underline"></h3>'
+        ?>
         <form action="../../../control/control-excluir-item.php" method="post">
             <div class="campo">
                 <?php
@@ -64,14 +66,21 @@ if (!isset($_SESSION['adm'])  and !isset($_SESSION['nome-item']) and !isset($_SE
                 ?>
                 </table>
             </div>
+            <input type="hidden" name="compl" value="undefined">
             <dialog id="modalConfirmacao">
                 <div class="texto">
                     <h4>Excluir item</h4>
                     <p>Tem certexa que deseja <strong>excluir</strong> esse item? Não será possivel desfazer essa ação.</p>
                 </div>
-                <div class="btns">
+                <div class="btns-dialog">
                     <input type="submit" name="apagar-item" value="Apagar item">
                     <button type="button" id="btnCancelarId">Cancelar</button>
+                </div>
+            </dialog>
+            <dialog id="modalErro">
+                <div class="texto">
+                    <h4>Excluir</h4>
+                    <p>É necessário selecionar o item que deseja excluir.</p>
                 </div>
             </dialog>
             <div class="campo">
