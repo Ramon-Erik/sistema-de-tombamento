@@ -25,10 +25,14 @@ class Item {
             $consulta_feita->bindValue(":id_ambiente",$id_ambiente);
             $consulta_feita->bindValue(":adm_responsavel",$id_responsavel);
             $consulta_feita->execute();
+            $ambiente = $this->pdo->prepare("select nome, complemento from ambientes where id = :id_ambiente");
+            $ambiente->bindValue(":id_ambiente", $id_ambiente);
+            $ambiente->execute();
             session_start();
             $_SESSION['item-cadastrado'] = 'sim';
-            // header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
-            header("location: ../view/cadastrar/ambiente/index.php?");
+            foreach ($ambiente as $value) {
+                header("location: ../view/ambiente-info/index.php?id=$id_ambiente&nome=$value[nome]&compl=$value[complemento]");
+            }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {
@@ -56,8 +60,6 @@ class Item {
             foreach ($ambiente as $value) {
                 header("location: ../view/ambiente-info/index.php?id=$id_ambiente&nome=$value[nome]&compl=$value[complemento]");
             }
-
-            // header("location: ../view/cadastrar/ambiente/index.php?");
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;
         } catch (Exception $e) {
@@ -180,7 +182,7 @@ class Item {
             $consulta_feita->bindValue(':id_ambiente', $id_ambiente);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount()) {
-                echo '<div class="container-tabela"><table>';
+                echo '<div class="container-tabela"><table id="myTable" class="display">';
                 echo '<thead><tr>';
                 echo '<th scope="col"></th>';
                 echo '<th scope="col">Nome</th>';
