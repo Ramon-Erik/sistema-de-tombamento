@@ -180,6 +180,7 @@ header div.titulo h1 {
     unicode-bidi: isolate;
 }
 
+header div.titulo-pagina h2,
 main div.titulo-pagina h2 {
     font-size: 1.5em;
     margin: 0;

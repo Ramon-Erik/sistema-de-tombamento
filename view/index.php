@@ -20,6 +20,7 @@ if (isset($_SESSION['adm'])) {
     <header>
         <div class="titulo">
             <h1>Sistema Patrimonial EEEP Salaberga</h1>
+            <h2>Início</h2>
         </div>
     </header>
     <main>

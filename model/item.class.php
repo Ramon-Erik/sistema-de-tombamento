@@ -215,23 +215,21 @@ class Item {
             echo "Erro genérico... <pre>" . $e;
         }
     }
-    public function apagar_item($id, $id_amb, $nome_amb, $compl) {
+    public function apagar_item($id) {
         try {
-            // echo '<pre>' . print_r($id);
-            $consulta = "DELETE FROM `itens` WHERE id = :id;";
-            $consulta_feita = $this->pdo->prepare($consulta);
-            $consulta_feita->bindValue(':id', $id);
-            $consulta_feita->execute();
+            $ambiente = $this->pdo->prepare("SELECT ambientes.id, ambientes.nome, ambientes.complemento FROM ambientes INNER JOIN itens WHERE itens.id = :id AND  itens.id_ambiente = ambientes.id;");
+            $ambiente->bindValue(':id', $id);
+            $ambiente->execute();
+            
+            $apagar = $this->pdo->prepare("DELETE FROM `itens` WHERE id = :id;");
+            $apagar->bindValue(':id', $id);
+            $apagar->execute();
+            
+            session_start();
             $_SESSION['item-apagado'] = 'sim';
-            if ($compl !== 'undefined') {
-                header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$nome_amb&compl=$compl");
-            } else {
-                $consulta_feita = $this->pdo->prepare('select nome, complemento from ambientes where id = :id');
-                $consulta_feita->bindValue(':id', $id);
-                $consulta_feita->execute();
-                foreach ($consulta_feita as $value) {
-                    header("location: ../view/ambiente-info/index.php?id=$id_amb&nome=$value[nome]&compl=$value[complemento]");
-                }
+            foreach ($ambiente as $value) {
+                header("location: ../view/ambiente-info/index.php?id=$value[id]&nome=$value[nome]&compl=$value[complemento]");
+                // echo '<pre>' . $id_amb . '<br>' . $nome_amb . '<br>' . $compl . '<br>';
             }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;

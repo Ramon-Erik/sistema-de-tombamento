@@ -6,7 +6,7 @@
     <title>Apagar um item</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="shortcut icon" href="../../../srecursos/icone/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../recursos/icone/favicon.png" type="image/x-icon">
 </head>
 <body>
     <?php 
@@ -54,8 +54,10 @@
         </nav>
         <div class="fade"></div>
         <div class="titulo">
-            <h1>Sistema de Tombamnto</h1>
-            <h2>Apagar item</h2>
+            <h1>Sistema Patrimonial EEEP. Salaberga</h1>
+            <div class="titulo-pagina">
+                <h2>Apagar item</h2>
+            </div>
         </div>
     </header>
     <main>

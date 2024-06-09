@@ -9,7 +9,7 @@ if (!isset($_SESSION['adm'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faça o tombamnto dos itens</title>
+    <title>Faça o cadastro dos itens</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../../recursos/icone/favicon.png" type="image/x-icon">
@@ -49,8 +49,10 @@ if (!isset($_SESSION['adm'])) {
         </nav>
         <div class="fade"></div>
         <div class="titulo">
-            <h1>Sistema Patrimonial EEEP Salaberga</h1>
-            <h2>Tombar item</h2>
+            <h1>Sistema Patrimonial EEEP. Salaberga</h1>
+            <div class="titulo-pagina">
+                <h2>Cadastrar item</h2>
+            </div>
         </div>
     </header>
     <main>

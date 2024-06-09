@@ -54,6 +54,7 @@
         <div class="fade"></div>
         <div class="titulo">
             <h1>Sistema Patrimonial EEEP. Salaberga</h1>
+            <h2>Ambientes</h2>
         </div>
     </header>
     <main>

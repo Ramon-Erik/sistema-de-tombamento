@@ -54,8 +54,10 @@
         </nav>
         <div class="fade"></div>
         <div class="titulo">
-            <h1>Sistema de Tombamento</h1>
-            <h2>Cadastrar ambiente</h2>
+            <h1>Sistema Patrimonial EEEP. Salaberga</h1>
+            <div class="titulo-pagina">
+                <h2>Apagar item</h2>
+            </div>
         </div>
     </header>
     <main>

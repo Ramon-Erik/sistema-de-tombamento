@@ -68,19 +68,22 @@
         <div class="fade"></div>    
         <div class="titulo">
             <h1>Sistema Patrimonial EEEP. Salaberga</h1>
+            <div class="titulo-pagina">
+                <h2>
+                    <?php 
+                    if (isset($_GET['nome']) and isset($_GET['compl']) and isset($_GET['id'])) {
+                        echo "$_GET[nome] $_GET[compl]";
+                    } else {
+                        header('location: ../menu-principal/index.php');
+                    }
+                    ?>
+                </h2>
+            </div>
         </div>
     </header>
     <main>
         <div class="titulo-pagina">
-            <h2>
-                <?php 
-                if (isset($_GET['nome']) and isset($_GET['compl']) and isset($_GET['id'])) {
-                    echo "$_GET[nome] $_GET[compl]";
-                } else {
-                    header('location: ../menu-principal/index.php');
-                }
-                ?>
-            </h2>
+            <h2>O que deseja fazer?</h2>
         </div>
         <form action="../../control/control-excluir-item.php" method="post">
             <dialog id="modalConfirmacao">
