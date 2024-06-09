@@ -105,5 +105,6 @@
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>  
     <script src="../../js/tabelas.js"></script>
     <script src="../../js/script.js"></script>
+    <script src="../../js/fade.js"></script>
 </body>
 </html>
