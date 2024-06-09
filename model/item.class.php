@@ -160,14 +160,29 @@ class Item {
             $consulta_feita->bindValue(':id_adm', $id_adm);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount()) {
-                echo '<table><thead><tr><th scope="col"></th><th scope="col">Marca</th><th scope="col">Modelo</th><th scope="col">Estado</th><th scope="col">Tombamento</th></tr></thead>';
+                echo '<div class="container-tabela">';
+                echo '<table id="myTable" class="table table-striped table-hover dataTable">';
+                echo '<thead>';
+                echo '<tr>';
+                echo '<th scope="col"></th>';
+                echo '<th scope="col">Marca</th>';
+                echo '<th scope="col">Modelo</th>';
+                echo '<th scope="col">Estado</th>';
+                echo '<th scope="col">Tombamento</th>';
+                echo '</tr>';
+                echo '</thead>';
+                foreach ($consulta_feita as $item) {
+                    echo "<tr>
+                    <td><input type=\"radio\" name=\"item\" value=\"$item[id]\" required></td>
+                    <td>$item[marca]</td>
+                    <td>$item[modelo]</td>
+                    <td>$item[estado]</td>
+                    <td>$item[tombamento]</td>
+                    </tr>";
+                }
+                echo "</table></div>";
             } else {
                 echo '<div class="campo"><div class="linha-form"><p>Não existem itens cadastrados nos parâmetros passados.</p></div></div>';
-            }
-            foreach ($consulta_feita as $item) {
-                if ($consulta_feita->rowCount() > 0) {
-                    echo "<tr><td><input type=\"radio\" name=\"item\" value=\"$item[id]\" required></td><td>$item[marca]</td><td>$item[modelo]</td><td>$item[estado]</td><td>$item[tombamento]</td></tr>";
-                }
             }
         } catch (PDOException $e) {
             echo "Erro com a conexão <pre>" . $e;

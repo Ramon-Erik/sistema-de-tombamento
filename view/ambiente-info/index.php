@@ -133,21 +133,10 @@
     <footer>
         <p>Desenvolvido pelo curso de Informática</p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>  
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>  
-    <script src="../js/tabelas.js">
-        // $(document).ready( function () {
-        //     $('#itensAmbiente').DataTable( {
-        //         "language": {
-        //             "url": "url: '//cdn.datatables.net/plug-ins/2.0.8/i18n/pt-BR.json'"
-        //         }
-        //     });
-        // } );
-        // var $ = require('jquery');
-        // var DataTable = require('datatables.net')(window, $);
-        
-    </script>
+    <script src="../js/tabelas.js"></script>
     <script src="../js/script.js"></script>
 </body>
 </html>

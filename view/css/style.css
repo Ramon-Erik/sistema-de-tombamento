@@ -34,7 +34,7 @@ body main section.ambientes div table tr th {
     text-align: right;
 }
 
-body main section.ambientes div table.dataTable tr td.dt-type-numeric {
+body main table.dataTable tr td.dt-type-numeric {
     text-align: center;
 }
 

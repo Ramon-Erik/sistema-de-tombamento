@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apagar um item</title>
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="shortcut icon" href="../../../recursos/icone/favicon.png" type="image/x-icon">
@@ -57,7 +63,9 @@
     </header>
     <main>
         <?php 
-        echo '<h3>Mostrando resultados para <span class="underline">' . $_SESSION['nome-item'] . '</span class="underline"> em <span class="underline">' . $_SESSION['nome-ambiente-item'] . '</span class="underline"> cadastrados por <span class="underline">' . $_SESSION['nome-adm-item'] . '</span class="underline"></h3>'
+        echo '<div class="titulo-pagina">';
+        echo '<h2>Mostrando resultados para <span class="underline">' . $_SESSION['nome-item'] . '</span class="underline"> em <span class="underline">' . $_SESSION['nome-ambiente-item'] . '</span class="underline"> cadastrados por <span class="underline">' . $_SESSION['nome-adm-item'] . '</span class="underline"></h2>';
+        echo '</div>';
         ?>
         <form action="../../../control/control-excluir-item.php" method="post">
             <div class="campo">
@@ -66,7 +74,6 @@
                 $item =  new Item();
                 $item->listar_itens($_SESSION['nome-item'], $_SESSION['id_ambiente-item'], $_SESSION['id_adm-item']);
                 ?>
-                </table>
             </div>
             <input type="hidden" name="compl" value="undefined">
             <dialog id="modalConfirmacao">
@@ -93,6 +100,10 @@
     <footer>
         <p>Desenvolvido pelo curso de Informátca</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>  
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>  
+    <script src="../../js/tabelas.js"></script>
     <script src="../../js/script.js"></script>
 </body>
 </html>
