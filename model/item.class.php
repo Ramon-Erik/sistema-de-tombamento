@@ -182,7 +182,7 @@ class Item {
             $consulta_feita->bindValue(':id_ambiente', $id_ambiente);
             $consulta_feita->execute();
             if ($consulta_feita->rowCount()) {
-                echo '<div class="container-tabela"><table id="myTable" class="display">';
+                echo '<div class="container-tabela"><table id="myTable" class="table table-striped table-hover dataTable">';
                 echo '<thead><tr>';
                 echo '<th scope="col"></th>';
                 echo '<th scope="col">Nome</th>';

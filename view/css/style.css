@@ -25,8 +25,17 @@
     box-sizing: border-box;
 }
 body {
-    font-family: Poppins, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: Poppins, Ubuntu, sans-serif;
     overflow-x: hidden;
+}
+
+body main section.ambientes div table tr th { 
+    padding: 5px 20px;
+    text-align: right;
+}
+
+body main section.ambientes div table.dataTable tr td.dt-type-numeric {
+    text-align: center;
 }
 
 header {
@@ -154,12 +163,28 @@ header .fade {
     height: 100vh;
 }
 
-header div.titulo {
+body header div.titulo {
     padding: 20px;
     width: 100%;
     text-align: center;
     color: white;
     background: var(--cor-bg-h1-header);
+    }
+    
+
+header div.titulo h1 {
+    display: block;
+    font-size: 2em;
+    margin: 0;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+main div.titulo-pagina h2 {
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: bold;
+    unicode-bidi: isolate;
 }
 
 main {
@@ -278,6 +303,7 @@ select {
 
 main div.container-tabela {
     width: calc(100% - 10px);
+    margin: auto;
     overflow-y: auto;
 }
 
@@ -289,8 +315,9 @@ main table td:not(:last-child) {
     border-right: 1px solid gray;
 }
 main table td {
-    text-align: center;
     padding: 10px;
+    text-align: center;
+    vertical-align: middle;
 }
 
 form .btn-submit {
