@@ -101,7 +101,7 @@ header #menuHambId:checked ~ .container .hamburger::after {
 header nav {
     position: fixed;
     top: 0;
-    left: -80%;
+    left: -72%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -140,8 +140,13 @@ header nav a {
     align-items: center;
     gap: 5px;
     width: 100%;
+    height: 100%;
     color: white;
     text-decoration: none;
+}
+
+header nav ul {
+    margin: 0;
 }
 
 header span.material-icons {
@@ -388,7 +393,7 @@ dialog .btns-dialog button {
 @media screen and (min-width: 600px) {
     header nav {
         width: 45vw;
-        left: -46%;
+        left: -43%;
     }
     header #menuHambId:checked ~ nav {
         transform: translateX(95%);
