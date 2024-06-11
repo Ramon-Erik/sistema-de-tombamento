@@ -139,5 +139,6 @@ if (!isset($_SESSION['adm'])) {
         <p>Desenvolvido pelo curso de Informática</p>
     </footer>
     <script src="../../js/placeholder-item.js"></script>
+    <script src="../../js/fade.js"></script>
 </body>
 </html>

@@ -99,5 +99,6 @@
         <p>Desenvolvido pelo curso de Informática</p>
     </footer>
     <script src="../js/script.js"></script>
+    <script src="../js/fade.js"></script>
 </body>
 </html>

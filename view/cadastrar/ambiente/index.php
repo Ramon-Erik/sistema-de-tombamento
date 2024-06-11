@@ -88,5 +88,6 @@
             Desenvolvido pelo curso de Informática
         </p>
     </footer>
+    <script src="../../js/fade.js"></script>
 </body>
 </html>

@@ -393,10 +393,10 @@ dialog .btns-dialog button {
 @media screen and (min-width: 600px) {
     header nav {
         width: 45vw;
-        left: -43%;
+        left: -46%;
     }
     header #menuHambId:checked ~ nav {
-        transform: translateX(95%);
+        transform: translateX(100%);
     }
     main {
         box-shadow: 3px 2px 10px 0px #00000040;

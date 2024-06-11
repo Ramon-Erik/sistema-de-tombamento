@@ -112,5 +112,6 @@
     <footer>
         <p>Desenvolvido pelo curso de Informátca</p>
     </footer>
+    <script src="../../js/fade.js"></script>
 </body>
 </html>
